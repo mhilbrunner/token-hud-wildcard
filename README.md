@@ -62,6 +62,7 @@ To install the module, follow any of these methods:
 - #### Fixes:
     - Fixed v10 compatibility
     - Fixed wildcard default image feature
+    - Fixed token scale and console deprecation warning spam
 - #### Localization:
     - Improved localization of all displayable text.
     - Languages:
