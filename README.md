@@ -3,6 +3,12 @@
 > Use this manifest URL to install:  
 > `https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/module.json`
 
+## Compatibility and Known Issues
+
+- Default token settings may not work if the module **Token Mold** is also used due to a `preCreateToken` hook conflict (see discussion [here](https://github.com/javieros105/FVTT-TokenHUDWildcard/issues/33#issuecomment-1329177859))
+
+## Description
+
 This is a really simple module for Foundry VTT that adds a button to the Token HUD if the corresponding token has Randomized Wildcard Images activated and more than 1 detected image.
 
 When this HUD button is pressed, a small panel will be displayed on the right side of the token HUD with a list of buttons for each detected image from the Wildcard Images functionality. Pressing any of these will allow to easily change the image of the Token without opening the token configuration panel.
