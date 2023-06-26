@@ -2,6 +2,8 @@
 > **NOTE:** This is a fork of [the original module's repository](https://github.com/javieros105/FVTT-TokenHUDWildcard) with fixes done by [MiniGrief](https://github.com/MiniGrief/FVTT-TokenHUDWildcard), myself and others, to allow people to install a fixed version for Foundry v10+ until the original is updated. Kudos to both **javieros105** and **MiniGrief** for their work! This fork also fixes the "default image" feature and adds a german translation.  
 > Use this manifest URL to install:  
 > `https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/module.json`
+>
+> Also consider switching to [Token Variant Art](https://foundryvtt.com/packages/token-variants), which is more complex but well maintained.
 
 ## Compatibility and Known Issues
 
