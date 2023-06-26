@@ -25,7 +25,7 @@ const getTokenDimensions = (token, imgName) => {
     const width = imgName.match(/_width(.*)_/);
     const scale = imgName.match(/_scale(.*)_/);
 
-    const prototypeData = token._actor.prototypeToken;
+    const prototypeData = token._source;
 
     return {
         height: height ? parseFloat(height[1]) : prototypeData.height,
