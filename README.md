@@ -1,9 +1,11 @@
 # Token HUD Wildcard for Foundry VTT
-> **NOTE:** This is a fork of [the original module's repository](https://github.com/javieros105/FVTT-TokenHUDWildcard) with fixes done by [MiniGrief](https://github.com/MiniGrief/FVTT-TokenHUDWildcard), myself and others, to allow people to install a fixed version for Foundry v10+ until the original is updated. Kudos to both **javieros105** and **MiniGrief** for their work! This fork also fixes the "default image" feature and adds a german translation.  
-> Use this manifest URL to install:  
-> `https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/module.json`
->
-> Also consider switching to [Token Variant Art](https://foundryvtt.com/packages/token-variants), which is more complex but well maintained.
+
+**NOTE:** This is a fork of [the original module's repository](https://github.com/javieros105/FVTT-TokenHUDWildcard) with fixes done by [MiniGrief](https://github.com/MiniGrief/FVTT-TokenHUDWildcard), myself and others, to allow people to install a fixed version for Foundry v10+. Kudos to both **javieros105** and **MiniGrief** for their work! 
+
+Use this manifest URL to install:  
+`https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/module.json`
+
+**THIS MODULE IS IN MAINTENANCE MODE.** Consider switching to [Token Variant Art](https://foundryvtt.com/packages/token-variants) or other alternatives.
 
 ## Compatibility and Known Issues
 
@@ -50,20 +52,24 @@ You can also use the image filename to set the dimensions of the token using the
 - these are valid filenames that will be picked up by the module `name.extension`, `name-different.extension`, `name-other_height2_scale1.5_.extension`
 
 ## Installation
+
 To install the module, follow any of these methods:
 
 ### Method 1
+
 - Start up Foundry and in the "Add-on Modules" tab click "Install Module".
 - In the "Manifest URL" field, paste the link: `https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/module.json`
 - Click "Install" and wait for it to finish.
 - It should be installed and available in your games.
 
 ### Method 2
+
 - Download the [.zip file](https://github.com/mhilbrunner/token-hud-wildcard/releases/latest/).
 - Extract the contents of the zip in your modules folder.
 - Restart Foundry and it should be available for your games.
 
 ## Condensed Changelog
+
 - #### Features:
     - Token image previews in HUD.
     - Default token on drop. Allows the user to pick a token that will always be chosen when dropping actor on canvas instead of random chosen by the wildcard setting.
@@ -83,15 +89,18 @@ To install the module, follow any of these methods:
     - Actor.getTokenImages() not working for users without file browser permissions
 
 ## Acknowledgements
+
 Thanks to Atropos for making this amazing platform for roleplaying games. I've enjoyed it a ton and the possibility of expanding functionalities and adding your own is just awesome.
 
 Also thanks to all the module developers that have allowed me to enjoy this software even more and that were the basis for making my own little module.
 
 ## Contributors
+
 - [@arbron](https://github.com/arbron): Making the update for compatibility with 0.8.x of Foundry and fixing errors.
 - [@SirTman](https://github.com/SirTman): Compatibility issue with apperance tab in prototype token foundry v9
 - [@cs96and](https://github.com/cs96and): Fix of default token rendering on preCreateToken hook that created duplicates of image and didn't render the default token.
 - [@MiniGrief](https://github.com/MiniGrief): Foundry v10 compatibility and bug fixes.
 
 ## License
+
 The source code is licensed under GPL-3.0.

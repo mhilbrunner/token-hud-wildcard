@@ -17,6 +17,16 @@ const tokenHUDWildcard = {
             type: Number,
             default: 50
         });
+        if (isNewerVersion(game.version, "11.0")) {
+            game.settings.register('token-hud-wildcard', 'animate', {
+                name: game.i18n.format('THWildcard.AnimateSettingName'),
+                hint: game.i18n.format('THWildcard.AnimateSettingHint'),
+                scope: 'world',
+                config: true,
+                type: Boolean,
+                default: true
+            });
+        }
     }
 }
 
@@ -25,7 +35,13 @@ const getTokenDimensions = (token, imgName) => {
     const width = imgName.match(/_width(.*)_/);
     const scale = imgName.match(/_scale(.*)_/);
 
-    const prototypeData = token._source;
+    var prototypeData;
+    if (isNewerVersion(game.version, "11.0")) {
+        prototypeData = token.delta?.syntheticActor?.prototypeToken;
+    }
+    if (!isNewerVersion(game.version, "11.0") || typeof prototypeData === "undefined") {
+        prototypeData = token._source;
+    }
 
     return {
         height: height ? parseFloat(height[1]) : prototypeData.height,
@@ -148,7 +164,12 @@ Hooks.on('renderTokenHUD', async (hud, html, token) => {
             const dimensions = getTokenDimensions(updateTarget, event.target.dataset.name);
             let updateInfo = { img: event.target.dataset.name, ...dimensions };
 
-            updateTarget.update(updateInfo);
+            if (isNewerVersion(game.version, "11.0")) {
+              const shouldAnimate = game.settings.get('token-hud-wildcard', 'animate');
+              updateTarget.update(updateInfo, {animate: shouldAnimate});
+            } else {
+              updateTarget.update(updateInfo);
+            }
         });
     });
 });

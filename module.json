@@ -1,21 +1,20 @@
 {
   "id": "token-hud-wildcard",
-  "title": "Token HUD Wildcard (fix)",
+  "title": "Token HUD Wildcard",
   "description": "This module adds a button to the Token HUD if the token has wildcard set and detects more than 1 image to choose from. Pressing the button displays a panel on the right side of the HUD with buttons for each image, pressing one of these allows to change the token image.",
-  "version": "1.7.3",
+  "url": "https://github.com/mhilbrunner/token-hud-wildcard",
+  "manifest": "https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/module.json",
+  "download": "https://github.com/mhilbrunner/token-hud-wildcard/archive/1.8.0.zip",
+  "version": "1.8.0",
   "compatibility": {
     "minimum": "10",
-    "verified": "10",
-    "maximum": "11"
+    "verified": "11"
   },
   "minimumCoreVersion": "10",
   "compatibleCoreVersion": "11",
   "author": "Javieros",
   "scripts": ["main.js"],
   "styles": ["./css/token-hud-wildcard.css"],
-  "url": "https://github.com/mhilbrunner/token-hud-wildcard",
-  "manifest": "https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/module.json",
-  "download": "https://github.com/mhilbrunner/token-hud-wildcard/archive/1.7.3.zip",
   "languages": [
     {
       "lang": "en",
