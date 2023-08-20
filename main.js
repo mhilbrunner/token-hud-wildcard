@@ -31,9 +31,14 @@ const tokenHUDWildcard = {
 }
 
 const getTokenDimensions = (token, imgName) => {
-    const height = imgName.match(/_height(.*)_/);
-    const width = imgName.match(/_width(.*)_/);
-    const scale = imgName.match(/_scale(.*)_/);
+    var height;
+    var width;
+    var scale;
+    if (typeof imgName !== "undefined") {
+        height = imgName.match(/_height(.*)_/);
+        width = imgName.match(/_width(.*)_/);
+        scale = imgName.match(/_scale(.*)_/);
+    }
 
     var prototypeData;
     if (isNewerVersion(game.version, "11.0")) {
