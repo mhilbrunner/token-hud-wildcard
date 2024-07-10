@@ -167,9 +167,9 @@ Hooks.on('renderTokenHUD', async (hud, html, token) => {
             const updateTarget = tokenToChange.document;
 
             const dimensions = getTokenDimensions(updateTarget, event.target.dataset.name);
-            let updateInfo = { img: event.target.dataset.name, ...dimensions };
+            let updateInfo = { "texture.src": event.target.dataset.name, ...dimensions };
 
-            if (isNewerVersion(game.version, "11.0")) {
+            if (isNewerVersion(game.version, "12.0")) {
               const shouldAnimate = game.settings.get('token-hud-wildcard', 'animate');
               updateTarget.update(updateInfo, {animate: shouldAnimate});
             } else {
