@@ -1,5 +1,5 @@
 {
-	"THWildcard.Title": "Click here to display image options",
+	"THWildcard.Title": "Click to display image options. Right click to randomize.",
 	"THWildcard.Fieldset": "Wildcard drop default",
 	"THWildcard.DefaultDescription": "When dropping a token in canvas with wildcard selected, if this field is filled this image will be selected instead of randomizing it.",
 	"THWildcard.DefaultLabel": "Default Image:",

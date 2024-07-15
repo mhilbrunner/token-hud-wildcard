@@ -1,135 +1,92 @@
-const tokenHUDWildcard = {
-    registerSettings: () => {
-        game.settings.register('token-hud-wildcard', 'imageDisplay', {
-            name: game.i18n.format('THWildcard.DisplaySettingName'),
-            hint: game.i18n.format('THWildcard.DisplaySettingHint'),
-            scope: 'world',
-            config: true,
-            type: Boolean,
-            default: true
-        });
-        game.settings.register("token-hud-wildcard", "imageOpacity", {
-            name: game.i18n.format('THWildcard.OpacitySettingName'),
-            hint: game.i18n.format('THWildcard.OpacitySettingHint'),
-            scope: "world",
-            config: true,
-            range: { min: 0, max: 100, step: 1 },
-            type: Number,
-            default: 50
-        });
-        if (isNewerVersion(game.version, "11.0")) {
-            game.settings.register('token-hud-wildcard', 'animate', {
-                name: game.i18n.format('THWildcard.AnimateSettingName'),
-                hint: game.i18n.format('THWildcard.AnimateSettingHint'),
-                scope: 'world',
-                config: true,
-                type: Boolean,
-                default: true
-            });
-        }
-    }
-}
-
-const getTokenDimensions = (token, imgName) => {
-    var height;
-    var width;
-    var scale;
-    if (typeof imgName !== "undefined") {
-        height = imgName.match(/_height(.*)_/);
-        width = imgName.match(/_width(.*)_/);
-        scale = imgName.match(/_scale(.*)_/);
-    }
-
-    var prototypeData;
-    if (isNewerVersion(game.version, "11.0")) {
-        prototypeData = token.delta?.syntheticActor?.prototypeToken;
-    }
-    if (!isNewerVersion(game.version, "11.0") || typeof prototypeData === "undefined") {
-        prototypeData = token._source;
-    }
-
-    return {
-        height: height ? parseFloat(height[1]) : prototypeData.height,
-        width: width ? parseFloat(width[1]) : prototypeData.width,
-        scale: scale ? parseFloat(scale[1]) : prototypeData.texture.scaleX,
-    }
-}
-
 Hooks.on('init', () => {
-    tokenHUDWildcard.registerSettings();
+    game.settings.register('token-hud-wildcard', 'imageDisplay', {
+        name: game.i18n.format('THWildcard.DisplaySettingName'),
+        hint: game.i18n.format('THWildcard.DisplaySettingHint'),
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: true
+    });
+    game.settings.register("token-hud-wildcard", "imageOpacity", {
+        name: game.i18n.format('THWildcard.OpacitySettingName'),
+        hint: game.i18n.format('THWildcard.OpacitySettingHint'),
+        scope: "world",
+        config: true,
+        range: { min: 0, max: 100, step: 1 },
+        type: Number,
+        default: 50
+    });
+    game.settings.register('token-hud-wildcard', 'animate', {
+        name: game.i18n.format('THWildcard.AnimateSettingName'),
+        hint: game.i18n.format('THWildcard.AnimateSettingHint'),
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: true
+    });
 });
 
 Hooks.on('ready', () => {
-    const renderTokenConfig = 'renderTokenConfig';
-    Hooks.on(renderTokenConfig, WildcardDefault.render);
-    WildcardDefault._hookPreTokenCreate();
+    Hooks.on('renderTokenConfig', renderTokenConfig);
+    Hooks.on('preCreateToken', (parent, data, options, userId) => {
+        const defaultValue = parent?.actor?.prototypeToken?.getFlag('token-hud-wildcard', 'default');
+        if (defaultValue && parent?.actor?.prototypeToken?.randomImg) {
+            /*const dimensions = getTokenDimensions(parent, defaultValue);
+            let updateInfo = { img: defaultValue, ...dimensions };*/
+            parent.updateSource({"texture.src" : defaultValue});
+        }
+    });
 });
 
-const WildcardDefault = {
-    getDefaultImg: async (token) => {
-        const flag = token.getFlag('token-hud-wildcard', 'default') || '';
-        return flag;
-    },
-    _hookPreTokenCreate() {
-        Hooks.on('preCreateToken', (parent, data, options, userId) => {
-            const defaultValue = parent?.actor?.prototypeToken?.getFlag('token-hud-wildcard', 'default');
-            if (defaultValue && parent?.actor?.prototypeToken?.randomImg) {
-                /*const dimensions = getTokenDimensions(parent, defaultValue);
-                let updateInfo = { img: defaultValue, ...dimensions };*/
-                parent.updateSource({"texture.src" : defaultValue});
-            }
-        });
-    },
-    render: async (config, html) => {
-        const defaultImg = await WildcardDefault.getDefaultImg(config.token);
-        if (config.token._id) {
-            return;
-        }
-        const imageDataTab = html.find('.tab[data-tab="appearance"],.tab[data-tab="image"]');
-        const checkBoxWildcard = imageDataTab.find('input[name="randomImg"]');
-        const configField = await renderTemplate('/modules/token-hud-wildcard/templates/configField.html', { defaultImg, available: checkBoxWildcard[0].checked });
-
-        imageDataTab.append(configField);
-        const defaultConfig = imageDataTab.find('.thwildcard-default');
-
-        defaultConfig.find('button').click(event => {
-            event.preventDefault();
-            const input = defaultConfig.find('input')[0];
-
-            const fp = new FilePicker({ current: input.value, field: input });
-            fp.browse(defaultImg);
-        });
-
-        checkBoxWildcard.click(event => {
-            if (event.target.checked) {
-                defaultConfig[0].classList.add('active');
-            } else {
-                defaultConfig[0].classList.remove('active');
-            }
-        });
+async function renderTokenConfig(config, html) {
+    const defaultImg = await getDefaultImg(config.token);
+    if (config.token._id) {
+        return;
     }
+    const imageDataTab = html.find('.tab[data-tab="appearance"],.tab[data-tab="image"]');
+    const checkBoxWildcard = imageDataTab.find('input[name="randomImg"]');
+    const configField = await renderTemplate(
+        '/modules/token-hud-wildcard/templates/configField.html',
+        { defaultImg, available: checkBoxWildcard[0].checked });
+
+    imageDataTab.append(configField);
+    const defaultConfig = imageDataTab.find('.thwildcard-default');
+
+    defaultConfig.find('button').click(event => {
+        event.preventDefault();
+        const input = defaultConfig.find('input')[0];
+
+        const fp = new FilePicker({ current: input.value, field: input });
+        fp.browse(defaultImg);
+    });
+
+    checkBoxWildcard.click(event => {
+        if (event.target.checked) {
+            defaultConfig[0].classList.add('active');
+        } else {
+            defaultConfig[0].classList.remove('active');
+        }
+    });
 }
 
-Hooks.on('renderTokenHUD', async (hud, html, token) => {
-    const actor = game.actors.get(token.actorId);
-    const images = await actor?.getTokenImages() ?? [];
+Hooks.on('renderTokenHUD', async (app, html, context) => {
+    if (!canvas.tokens.controlled) {
+        return;
+    }
 
+    const token = canvas.tokens.controlled[canvas.tokens.controlled.length - 1];
+    if (!token) {
+        return;
+    }
+
+    const images = await getTokenImages(token);
     if (images.length < 2) {
         return;
     }
 
     const imageDisplay = game.settings.get('token-hud-wildcard', 'imageDisplay');
     const imageOpacity = game.settings.get('token-hud-wildcard', 'imageOpacity') / 100;
-    const imagesParsed = images.map(im => {
-        const split = im.split('/');
-        var extension = im.split('.');
-        extension = extension[extension.length - 1];
-        const img = ['jpg', 'jpeg', 'png', 'svg', 'webp'].includes(extension);
-        const vid = ['webm', 'mp4', 'm4v'].includes(extension);
-        return { route: im, name: split[split.length - 1], used: im === token.texture.src, img, vid, type: img || vid };
-    });
-
-    const wildcardDisplay = await renderTemplate('/modules/token-hud-wildcard/templates/hud.html', { imagesParsed, imageDisplay, imageOpacity });
+    const wildcardDisplay = await renderTemplate('/modules/token-hud-wildcard/templates/hud.html', { images, imageDisplay, imageOpacity });
 
     html.find('div.right')
         .append(wildcardDisplay)
@@ -143,15 +100,24 @@ Hooks.on('renderTokenHUD', async (hud, html, token) => {
 
             if (clickedButton === tokenButton && activeButton !== tokenButton) {
                 tokenButton.classList.add('active');
-
                 html.find('.thwildcard-selector-wrap')[0].classList.add('active');
                 const effectSelector = '[data-action="effects"]';
                 html.find(`.control-icon${effectSelector}`)[0].classList.remove('active');
                 html.find('.status-effects')[0].classList.remove('active');
             } else {
                 tokenButton.classList.remove('active');
-
                 html.find('.thwildcard-selector-wrap')[0].classList.remove('active');
+            }
+        })
+        .contextmenu(async (event) => {
+            if (event.target?.parentElement?.dataset?.action !== 'thwildcard-selector') {
+                return;
+            }
+            event.preventDefault();
+            event.stopPropagation();
+            const randomImg = await getRandomTokenImage(token);
+            if (randomImg?.route) {
+                updateTokenImage(token, randomImg.route);
             }
         });
 
@@ -161,20 +127,84 @@ Hooks.on('renderTokenHUD', async (hud, html, token) => {
         buttons[button].addEventListener('click', function (event) {
             event.preventDefault();
             event.stopPropagation();
-            const controlled = canvas.tokens.controlled;
-            const index = controlled.findIndex(x => x.document._id === token._id);
-            const tokenToChange = controlled[index];
-            const updateTarget = tokenToChange.document;
-
-            const dimensions = getTokenDimensions(updateTarget, event.target.dataset.name);
-            let updateInfo = { img: event.target.dataset.name, ...dimensions };
-
-            if (isNewerVersion(game.version, "11.0")) {
-              const shouldAnimate = game.settings.get('token-hud-wildcard', 'animate');
-              updateTarget.update(updateInfo, {animate: shouldAnimate});
-            } else {
-              updateTarget.update(updateInfo);
-            }
+            updateTokenImage(token, event.target.dataset.name)
+        });
+        buttons[button].addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            new ImagePopout(event.target.dataset.name, {
+                title: token.name,
+                shareable: token.actor?.isOwner ?? game.user?.isGM,
+                uuid: token.actor?.uuid
+            }).render(true);
         });
     });
 });
+
+function updateTokenImage(token, img) {
+    const dimensions = getTokenDimensions(token, img);
+    let updateInfo = { "texture.src": img, ...dimensions };
+    const shouldAnimate = game.settings.get('token-hud-wildcard', 'animate');
+    token.document.update(updateInfo, {animate: shouldAnimate});
+}
+
+async function getRandomTokenImage(token) {
+    if (!token) {
+        return;
+    }
+    const images = await getTokenImages(token);
+    if (!images || images.length < 2) {
+        return;
+    }
+    return images[Math.floor(Math.random()*images.length)]
+}
+
+async function getTokenImages(token) {
+    if (!token) {
+        return [];
+    }
+
+    const actor = token.actor;
+    const images = await actor?.getTokenImages();
+    if (!images || images.length < 2) {
+        return [];
+    }
+
+    const imagesParsed = images.map(im => {
+        const name = im.split('/').pop();
+        const extension = im.split('.').pop().toLowerCase();
+        const img = ['jpg', 'jpeg', 'png', 'svg', 'webp'].includes(extension);
+        const vid = ['webm', 'mp4', 'm4v'].includes(extension);
+        return { route: im, name: name, used: im === token.texture.src, img, vid, type: img || vid };
+    });
+
+    if (!imagesParsed) {
+        return [];
+    }
+
+    return imagesParsed;
+}
+
+async function getDefaultImg(token) {
+    const flag = token?.getFlag('token-hud-wildcard', 'default') || '';
+    return flag;
+}
+
+function getTokenDimensions(token, imgName) {
+    var height;
+    var width;
+    var scale;
+    if (imgName) {
+        height = imgName.match(/_height(.*)_/);
+        width = imgName.match(/_width(.*)_/);
+        scale = imgName.match(/_scale(.*)_/);
+    }
+
+    var prototypeData = token.actor?.prototypeToken;
+
+    return {
+        height: height ? parseFloat(height[1]) : prototypeData.height,
+        width: width ? parseFloat(width[1]) : prototypeData.width,
+        scale: scale ? parseFloat(scale[1]) : prototypeData.texture.scaleX,
+    }
+}
