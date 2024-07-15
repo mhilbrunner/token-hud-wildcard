@@ -1,25 +1,16 @@
 # Token HUD Wildcard for Foundry VTT
 
-**NOTE:** This is a fork of [the original module's repository](https://github.com/javieros105/FVTT-TokenHUDWildcard) with fixes done by [MiniGrief](https://github.com/MiniGrief/FVTT-TokenHUDWildcard), myself and others, to allow people to install a fixed version for Foundry v10+. Kudos to both **javieros105** and **MiniGrief** for their work! 
+![Compatible Foundry Version](https://img.shields.io/badge/Foundry-v12-informational)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/mhilbrunner/token-hud-wildcard?label=Latest+Release)
+![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Ftoken-hud-wildcard&colorB=4aa94a)
+![GitHub Downloads All Releases](https://img.shields.io/github/downloads/mhilbrunner/token-hud-wildcard/total?label=Downloads+(Total))
+![GitHub Downloads Release](https://img.shields.io/github/downloads/mhilbrunner/token-hud-wildcard/latest/total?label=Downloads+(Latest))
+![GitHub Release Date](https://img.shields.io/github/release-date/mhilbrunner/token-hud-wildcard?label=Release+Date)
 
-Use this manifest URL to install:  
-`https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/module.json`
+This is a really simple module for [Foundry VTT](https://foundryvtt.com/) that adds a button to the Token HUD if the corresponding token has *Randomized Wildcard Images* activated and more than 1 detected image.
 
-**THIS MODULE IS IN MAINTENANCE MODE.** Consider switching to [Token Variant Art](https://foundryvtt.com/packages/token-variants) or other alternatives.
-
-## Compatibility and Known Issues
-
-- Default token settings may not work if the module **Token Mold** is also used due to a `preCreateToken` hook conflict (see discussion [here](https://github.com/javieros105/FVTT-TokenHUDWildcard/issues/33#issuecomment-1329177859))
-
-## Description
-
-This is a really simple module for Foundry VTT that adds a button to the Token HUD if the corresponding token has Randomized Wildcard Images activated and more than 1 detected image.
-
-When this HUD button is pressed, a small panel will be displayed on the right side of the token HUD with a list of buttons for each detected image from the Wildcard Images functionality. Pressing any of these will allow to easily change the image of the Token without opening the token configuration panel.
-
-I made this module because having to open the Token Configuration to change the image or making a macro for each token I needed to be able to rotate images was too much of a bother.
-
-Hopefully this module can help others!
+When this HUD button is pressed, a small panel will be displayed on the right side of the token HUD with a list of buttons for each detected image from the Wildcard Images functionality.
+Pressing any of these will allow to easily change the image of the Token without opening the token configuration panel.
 
 <p style="text-align: center;">
 <img src="https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/images/prototype-config.png" alt="Prototype Config" width="500"/>
@@ -29,6 +20,14 @@ Hopefully this module can help others!
 </p>
 
 _The token images were done by the amazing Ross McConnell at [2-Minute Tabletop](https://2minutetabletop.com/) and are part of the Hero Tokens 3 Pack._
+
+**NOTE:** This is a updated fork of the original module by **javieros105**. See **Contributors** below for everyone who helped out maintaining this module. 
+If you need something more fully featured, consider switching to [Token Variant Art](https://foundryvtt.com/packages/token-variants) or other alternatives.
+
+## Compatibility and Known Issues
+
+- Default token settings may not work if the module **Token Mold** is also used due to a `preCreateToken` hook conflict (see discussion [here](https://github.com/javieros105/FVTT-TokenHUDWildcard/issues/33#issuecomment-1329177859))
+- The module only works for users with file browser permissions, as those are required for `Actor.getTokenImages()`
 
 ## Usage
 
@@ -55,38 +54,25 @@ You can also use the image filename to set the dimensions of the token using the
 
 To install the module, follow any of these methods:
 
-### Method 1
+### Method 1 (Recommended)
+- Use Foundry's Package Manager to search for and install the package.
+
+### Method 2
 
 - Start up Foundry and in the "Add-on Modules" tab click "Install Module".
 - In the "Manifest URL" field, paste the link: `https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/module.json`
 - Click "Install" and wait for it to finish.
 - It should be installed and available in your games.
 
-### Method 2
+### Method 3
 
 - Download the [.zip file](https://github.com/mhilbrunner/token-hud-wildcard/releases/latest/).
 - Extract the contents of the zip in your modules folder.
 - Restart Foundry and it should be available for your games.
 
-## Condensed Changelog
+## Changelog
 
-- #### Features:
-    - Token image previews in HUD.
-    - Default token on drop. Allows the user to pick a token that will always be chosen when dropping actor on canvas instead of random chosen by the wildcard setting.
-    - Global setting to choose between filename and image previews in HUD.
-    - Global opacity setting in module settings for token previews in HUD.
-- #### Fixes:
-    - Fixed v10 compatibility
-    - Fixed wildcard default image feature
-    - Fixed token scale and console deprecation warning spam
-- #### Localization:
-    - Improved localization of all displayable text.
-    - Languages:
-        - English
-        - Spanish
-        - German
-- #### Known issues:
-    - Actor.getTokenImages() not working for users without file browser permissions
+See [Releases](https://github.com/mhilbrunner/token-hud-wildcard/releases).
 
 ## Acknowledgements
 
@@ -96,6 +82,7 @@ Also thanks to all the module developers that have allowed me to enjoy this soft
 
 ## Contributors
 
+- [@javieros105](https://github.com/javieros105): Original module
 - [@arbron](https://github.com/arbron): Making the update for compatibility with 0.8.x of Foundry and fixing errors.
 - [@SirTman](https://github.com/SirTman): Compatibility issue with apperance tab in prototype token foundry v9
 - [@cs96and](https://github.com/cs96and): Fix of default token rendering on preCreateToken hook that created duplicates of image and didn't render the default token.
