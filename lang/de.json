@@ -5,9 +5,15 @@
 	"THWildcard.DefaultLabel": "Standard-Bild:",
 	"THWildcard.ButtonTitle": "Datei wählen",
 	"THWildcard.DisplaySettingName": "Als Bild anzeigen?",
-	"THWildcard.DisplaySettingHint": "Deaktivieren, um die Bilder stattdessen als Liste von Dateinamen im Auswahl-HUD anzuzeigen.",
+	"THWildcard.DisplaySettingHint": "Deaktivieren, um die Bilder stattdessen als Liste von Dateinamen im Auswahl-HUD anzuzeigen. Standard: ein.",
 	"THWildcard.OpacitySettingName": "Transparenz der Tokenvorschau",
-	"THWildcard.OpacitySettingHint": "Lege die Transparenz der Token-Vorschau im HUD (bevor der Mauszeiger über sie fährt)  fest.",
+	"THWildcard.OpacitySettingHint": "Lege die Transparenz der Token-Vorschau im HUD (bevor der Mauszeiger über sie fährt)  fest. Standard: 50%.",
 	"THWildcard.AnimateSettingName": "Veränderung animieren",
-	"THWildcard.AnimateSettingHint": "Wenn aktiviert, werden Änderungen der Figurgröße animiert."
+	"THWildcard.AnimateSettingHint": "Wenn aktiviert, werden Änderungen der Figurgröße animiert. Standard: ein.",
+	"THWildcard.parseSettingName": "Dateinamen auslesen",
+	"THWildcard.parseSettingHint": "Wenn aktiviert, werden Skalierung/Höhe/Breite für Figuren enn vorhanden aus Bilddateinamen ausgelesen und gesetzt. Standard: ein.",
+	"THWildcard.randomizeSettingName": "Rechtsklick für Zufallsbild",
+	"THWildcard.randomizeSettingHint": "Wenn aktiviert, wählt ein Rechtsklick auf den Token-HUD-Button ein zufälliges Bild. Standard: ein.",
+	"THWildcard.shareSettingName": "Rechtsklick zum Teilen",
+	"THWildcard.shareSettingHint": "Wenn aktiviiert, öffnet ein Rechtsklick auf ein Bild dieses in einem Popup, womit es mit Spielern geteilt werden kann. Standard: ein."
 }

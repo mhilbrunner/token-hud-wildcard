@@ -2,7 +2,7 @@ Hooks.on('init', () => {
     game.settings.register('token-hud-wildcard', 'imageDisplay', {
         name: game.i18n.format('THWildcard.DisplaySettingName'),
         hint: game.i18n.format('THWildcard.DisplaySettingHint'),
-        scope: 'world',
+        scope: 'client',
         config: true,
         type: Boolean,
         default: true
@@ -10,7 +10,7 @@ Hooks.on('init', () => {
     game.settings.register("token-hud-wildcard", "imageOpacity", {
         name: game.i18n.format('THWildcard.OpacitySettingName'),
         hint: game.i18n.format('THWildcard.OpacitySettingHint'),
-        scope: "world",
+        scope: "client",
         config: true,
         range: { min: 0, max: 100, step: 1 },
         type: Number,
@@ -19,7 +19,31 @@ Hooks.on('init', () => {
     game.settings.register('token-hud-wildcard', 'animate', {
         name: game.i18n.format('THWildcard.AnimateSettingName'),
         hint: game.i18n.format('THWildcard.AnimateSettingHint'),
+        scope: 'client',
+        config: true,
+        type: Boolean,
+        default: true
+    });
+    game.settings.register('token-hud-wildcard', 'parseFileNames', {
+        name: game.i18n.format('THWildcard.parseSettingName'),
+        hint: game.i18n.format('THWildcard.parseSettingHint'),
         scope: 'world',
+        config: true,
+        type: Boolean,
+        default: true
+    });
+    game.settings.register('token-hud-wildcard', 'rightClickRandomize', {
+        name: game.i18n.format('THWildcard.randomizeSettingName'),
+        hint: game.i18n.format('THWildcard.randomizeSettingHint'),
+        scope: 'client',
+        config: true,
+        type: Boolean,
+        default: true
+    });
+    game.settings.register('token-hud-wildcard', 'rightClickShare', {
+        name: game.i18n.format('THWildcard.shareSettingName'),
+        hint: game.i18n.format('THWildcard.shareSettingHint'),
+        scope: 'client',
         config: true,
         type: Boolean,
         default: true
@@ -111,6 +135,9 @@ Hooks.on('renderTokenHUD', async (app, html, context) => {
             if (event.target?.parentElement?.dataset?.action !== 'thwildcard-selector') {
                 return;
             }
+            if (!game.settings.get('token-hud-wildcard', 'rightClickRandomize')) {
+                return;
+            }
             event.preventDefault();
             event.stopPropagation();
             const randomImg = await getRandomTokenImage(token);
@@ -128,6 +155,9 @@ Hooks.on('renderTokenHUD', async (app, html, context) => {
             updateTokenImage(token, event.target.dataset.name)
         });
         buttons[button].addEventListener('contextmenu', function (event) {
+            if (!game.settings.get('token-hud-wildcard', 'rightClickShare')) {
+                return;
+            }
             event.preventDefault();
             event.stopPropagation();
             new ImagePopout(event.target.dataset.name, {
@@ -198,7 +228,7 @@ async function getDefaultImg(token) {
 var TOKENHUD_VAR_REGEX = {};
 
 function extractNumVar(str, varName, defaultValue = undefined) {
-    if (!str || !varName) {
+    if (!str || !varName || !game.settings.get('token-hud-wildcard', 'parseFileNames')) {
         return defaultValue;
     }
 
