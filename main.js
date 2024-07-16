@@ -31,9 +31,7 @@ Hooks.on('ready', () => {
     Hooks.on('preCreateToken', (parent, data, options, userId) => {
         const defaultValue = parent?.actor?.prototypeToken?.getFlag('token-hud-wildcard', 'default');
         if (defaultValue && parent?.actor?.prototypeToken?.randomImg) {
-            /*const dimensions = getTokenDimensions(parent, defaultValue);
-            let updateInfo = { img: defaultValue, ...dimensions };*/
-            parent.updateSource({"texture.src" : defaultValue});
+            updateTokenImage(parent, defaultValue, { updateDocument: false, updateSource: true });
         }
     });
 });
@@ -141,11 +139,18 @@ Hooks.on('renderTokenHUD', async (app, html, context) => {
     });
 });
 
-function updateTokenImage(token, img) {
-    const dimensions = getTokenDimensions(token, img);
-    let updateInfo = { "texture.src": img, ...dimensions };
+function updateTokenImage(token, img, opts = { updateSource: false, updateDocument: true }) {
+    let updateInfo = getTokenDimensions(token, img);
+    updateInfo["texture.src"] = img;
     const shouldAnimate = game.settings.get('token-hud-wildcard', 'animate');
-    token.document.update(updateInfo, {animate: shouldAnimate});
+
+    if (opts.updateSource) {
+        token.updateSource(updateInfo);
+    }
+
+    if (opts.updateDocument) {
+        token.document.update(updateInfo, {animate: shouldAnimate});
+    }
 }
 
 async function getRandomTokenImage(token) {
@@ -190,21 +195,40 @@ async function getDefaultImg(token) {
     return flag;
 }
 
+var TOKENHUD_VAR_REGEX = {};
+
+function extractNumVar(str, varName, defaultValue = undefined) {
+    if (!str || !varName) {
+        return defaultValue;
+    }
+
+    const prefix = '_' + varName;
+    if (!TOKENHUD_VAR_REGEX[varName]) {
+        TOKENHUD_VAR_REGEX[varName] = new RegExp(prefix + '([0-9]*[.])?[0-9]+');
+    }
+
+    var val = str.match(TOKENHUD_VAR_REGEX[varName]);
+    if (!val || val.length < 1) {
+        return defaultValue;
+    }
+
+    val = val[0].replace(prefix, '');
+    val = parseFloat(val);
+
+    if (isNaN(val)) {
+        return defaultValue;
+    }
+
+    return val;
+}
+
 function getTokenDimensions(token, imgName) {
-    var height;
-    var width;
-    var scale;
-    if (imgName) {
-        height = imgName.match(/_height(.*)_/);
-        width = imgName.match(/_width(.*)_/);
-        scale = imgName.match(/_scale(.*)_/);
+    var prototypeData = token?.actor?.prototypeToken;
+    var dimensionData = {
+        height: extractNumVar(imgName, 'height', prototypeData?.height),
+        width: extractNumVar(imgName, 'width', prototypeData?.width),
+        "texture.scaleX": extractNumVar(imgName, 'scale', prototypeData?.texture.scaleX),
+        "texture.scaleY": extractNumVar(imgName, 'scale', prototypeData?.texture.scaleY),
     }
-
-    var prototypeData = token.actor?.prototypeToken;
-
-    return {
-        height: height ? parseFloat(height[1]) : prototypeData.height,
-        width: width ? parseFloat(width[1]) : prototypeData.width,
-        scale: scale ? parseFloat(scale[1]) : prototypeData.texture.scaleX,
-    }
+    return dimensionData;
 }
