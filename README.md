@@ -19,15 +19,14 @@ Pressing any of these will allow to easily change the image of the Token without
 <img src="https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/images/hud-options2.png" alt="HUD Options" height="280"/>
 </p>
 
-_The token images were done by the amazing Ross McConnell at [2-Minute Tabletop](https://2minutetabletop.com/) and are part of the Hero Tokens 3 Pack._
+*The token images were done by the amazing Ross McConnell at [2-Minute Tabletop](https://2minutetabletop.com/) and are part of the Hero Tokens 3 Pack.*
 
-**NOTE:** This is a updated fork of the original module by **javieros105**. See **Contributors** below for everyone who helped out maintaining this module. 
+**NOTE:** This is a updated fork of the original module by **javieros105**. See **Contributors** below for everyone who helped out maintaining this module.
 If you need something more fully featured, consider switching to [Token Variant Art](https://foundryvtt.com/packages/token-variants) or other alternatives.
 
 ## Compatibility and Known Issues
 
-- Default token settings may not work if the module **Token Mold** is also used due to a `preCreateToken` hook conflict (see discussion [here](https://github.com/javieros105/FVTT-TokenHUDWildcard/issues/33#issuecomment-1329177859))
-- The module only works for users with file browser permissions, as those are required for `Actor.getTokenImages()`
+- The module only works for users with file browser permissions, as those are required for `Actor.getTokenImages()`.
 
 ## Usage
 
@@ -55,6 +54,7 @@ You can also use the image filename to set the dimensions of the token using the
 To install the module, follow any of these methods:
 
 ### Method 1 (Recommended)
+
 - Use Foundry's Package Manager to search for and install the package.
 
 ### Method 2
