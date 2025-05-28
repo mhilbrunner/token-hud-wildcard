@@ -7,15 +7,6 @@ Hooks.on('init', () => {
         type: Boolean,
         default: true
     });
-    game.settings.register('token-hud-wildcard', 'imageOpacity', {
-        name: game.i18n.format('THWildcard.OpacitySettingName'),
-        hint: game.i18n.format('THWildcard.OpacitySettingHint'),
-        scope: 'client',
-        config: true,
-        range: { min: 0, max: 100, step: 1 },
-        type: Number,
-        default: 50
-    });
     game.settings.register('token-hud-wildcard', 'animate', {
         name: game.i18n.format('THWildcard.AnimateSettingName'),
         hint: game.i18n.format('THWildcard.AnimateSettingHint'),
@@ -107,8 +98,7 @@ Hooks.on('renderTokenHUD', async (app, html, context) => {
     }
 
     const imageDisplay = game.settings.get('token-hud-wildcard', 'imageDisplay');
-    const imageOpacity = game.settings.get('token-hud-wildcard', 'imageOpacity') / 100;
-    const wildcardDisplay = await renderTemplate('/modules/token-hud-wildcard/templates/hud.html', { images, imageDisplay, imageOpacity });
+    const wildcardDisplay = await renderTemplate('/modules/token-hud-wildcard/templates/hud.html', { images, imageDisplay });
 
     let right = html.querySelector('div.right');
     right?.insertAdjacentHTML('beforeend', wildcardDisplay);

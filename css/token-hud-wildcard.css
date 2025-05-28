@@ -31,13 +31,12 @@
     margin: 3px;
     line-height: 0;
     border-color: transparent;
+    opacity: var(--ui-fade-opacity);
 }
 
 #token-hud .thwildcard-button-select:hover {
     border-color: var(--control-hover-border-color);
-    .thwildcard-button-image {
-        opacity: 1 !important;
-    }
+    opacity: 1;
 }
 
 #token-hud .thwildcard-button-select.list {
