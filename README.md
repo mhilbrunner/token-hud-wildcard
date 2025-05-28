@@ -1,13 +1,13 @@
 # Token HUD Wildcard for Foundry VTT
 
-![Compatible Foundry Version](https://img.shields.io/badge/Foundry-v12-informational)
+![Compatible Foundry Version](https://img.shields.io/badge/Foundry-v13-informational)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/mhilbrunner/token-hud-wildcard?label=Latest+Release)
 ![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Ftoken-hud-wildcard&colorB=4aa94a)
 ![GitHub Downloads All Releases](https://img.shields.io/github/downloads/mhilbrunner/token-hud-wildcard/total?label=Downloads+(Total))
 ![GitHub Downloads Release](https://img.shields.io/github/downloads/mhilbrunner/token-hud-wildcard/latest/total?label=Downloads+(Latest))
 ![GitHub Release Date](https://img.shields.io/github/release-date/mhilbrunner/token-hud-wildcard?label=Release+Date)
 
-This is a really simple module for [Foundry VTT](https://foundryvtt.com/) that adds a button to the Token HUD if the corresponding token has *Randomized Wildcard Images* activated and more than 1 detected image.
+This is a really simple module for [Foundry VTT](https://foundryvtt.com/) that adds a button to the Token HUD if the token has *Randomized Wildcard Images* activated and more than 1 image.
 
 When this HUD button is pressed, a small panel will be displayed on the right side of the token HUD with a list of buttons for each detected image from the Wildcard Images functionality.
 Pressing any of these will allow to easily change the image of the Token without opening the token configuration panel.
@@ -21,12 +21,8 @@ Pressing any of these will allow to easily change the image of the Token without
 
 *The token images were done by the amazing Ross McConnell at [2-Minute Tabletop](https://2minutetabletop.com/) and are part of the Hero Tokens 3 Pack.*
 
-**NOTE:** This is a updated fork of the original module by **javieros105**. See **Contributors** below for everyone who helped out maintaining this module.
+**Note:** This is a updated fork of the original module by **javieros105**. See **Contributors** below for everyone who helped out maintaining this module.
 If you need something more fully featured, consider switching to [Token Variant Art](https://foundryvtt.com/packages/token-variants) or other alternatives.
-
-## Compatibility and Known Issues
-
-- The module only works for users with file browser permissions, as those are required for `Actor.getTokenImages()`.
 
 ## Usage
 
@@ -44,8 +40,8 @@ If you're gonna use the default image field, I recommend you use an image file t
 
 You can also use the image filename to set the dimensions of the token using the following example format:
 
-- wildcard images use this pattern `name*`
-- `name_height<number>_width<number>_scale<number>_.extension`, it's important that each parameter s preceded and followed by an underscore, so if you want to set up height, there has to be a `_height<number>_` somewhere in the name
+- wildcard images use the pattern `name*`
+- `name_height<number>_width<number>_scale<number>_.extension`, it's important that each parameter is preceded and followed by an underscore, so if you want to set up height, there has to be a `_height<number>_` somewhere in the name
 - you can choose to change `<number>` for a positive integer or floating number and which one to fill. If there are any parameter missing then the module will use the prototype token parameters to fill the ones missing, so you can use images with no parameter setting at all or just set one or two of the parameters.
 - these are valid filenames that will be picked up by the module `name.extension`, `name-different.extension`, `name-other_height2_scale1.5_.extension`
 
