@@ -155,8 +155,8 @@ Hooks.on('renderTokenHUD', async (app, html, context) => {
             event.preventDefault();
             event.stopPropagation();
             new ImagePopout(imgName, {
-                title: token.name,
-                shareable: token.actor?.isOwner ?? game.user?.isGM,
+                title: token.document.name,
+                shareable: token.isOwner ?? game.user?.isGM,
                 uuid: token.actor?.uuid
             }).render(true);
         });
@@ -204,7 +204,7 @@ async function getTokenImages(token) {
         const extension = im.split('.').pop().toLowerCase();
         const img = ['jpg', 'jpeg', 'png', 'svg', 'webp'].includes(extension);
         const vid = ['webm', 'mp4', 'm4v'].includes(extension);
-        return { route: im, name: name, used: im === token.texture.src, img, vid, type: img || vid };
+        return { route: im, name: name, used: im === token.document.texture.src, img, vid, type: img || vid };
     });
 
     if (!imagesParsed) {

@@ -23,8 +23,6 @@
 #token-hud .thwildcard-button-select {
     max-width: 300px;
     overflow-wrap: break-word;
-    padding-top: 0;
-    padding-bottom: 0;
     width: max-content;
     height: unset;
     padding: 0;
@@ -34,7 +32,7 @@
     opacity: var(--ui-fade-opacity);
 }
 
-#token-hud .thwildcard-button-select:hover {
+#token-hud .thwildcard-button-select:hover, #token-hud .thwildcard-button-select.active {
     border-color: var(--control-hover-border-color);
     opacity: 1;
 }
