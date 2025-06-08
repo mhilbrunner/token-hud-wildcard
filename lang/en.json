@@ -6,6 +6,8 @@
 	"THWildcard.ButtonTitle": "Browse File",
 	"THWildcard.DisplaySettingName": "Display as Image?",
 	"THWildcard.DisplaySettingHint": "Disable to display wildcard options as a list of their filenames in the HUD. Default enabled.",
+	"THWildcard.VideoAutoplaySettingName": "Autoplay video previews",
+	"THWildcard.VideoAutoplaySettingHint": "Disable to not autoplay video wildcard tokens in the Token HUD preview. May improvde performance if there are many video files. Default enabled.",
 	"THWildcard.OpacitySettingName": "Opacity of token preview",
 	"THWildcard.OpacitySettingHint": "Configure the opacity of the token previews in the HUD before hovering on them. Default 50%.",
 	"THWildcard.AnimateSettingName": "Animate changes",
