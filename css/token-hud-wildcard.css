@@ -19,6 +19,9 @@
 
 #token-hud .thwildcard-selector-wrap.active {
     visibility: visible;
+    img {
+        filter: unset;
+    }
 }
 #token-hud .thwildcard-button-select {
     max-width: 300px;
