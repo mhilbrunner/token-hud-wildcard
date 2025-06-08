@@ -248,11 +248,19 @@ function extractNumVar(str, varName, defaultValue = undefined) {
 
 function getTokenDimensions(token, imgName) {
     var prototypeData = token?.actor?.prototypeToken;
-    var dimensionData = {
-        height: extractNumVar(imgName, 'height', prototypeData?.height),
-        width: extractNumVar(imgName, 'width', prototypeData?.width),
-        'texture.scaleX': extractNumVar(imgName, 'scale', prototypeData?.texture.scaleX),
-        'texture.scaleY': extractNumVar(imgName, 'scale', prototypeData?.texture.scaleY),
-    }
+    var dimensionData = {};
+    dimensionData['height'] = extractNumVar(imgName, 'height', prototypeData?.height ?? 1);
+    dimensionData['width'] = extractNumVar(imgName, 'width', prototypeData?.height ?? 1);
+    dimensionData['alpha'] = extractNumVar(imgName, 'alpha', prototypeData?.alpha ?? 1);
+    // Scale
+    dimensionData['texture.scaleX'] = extractNumVar(imgName, 'scale', prototypeData?.texture.scaleX ?? 1);
+    dimensionData['texture.scaleY'] =  extractNumVar(imgName, 'scale', prototypeData?.texture.scaleY ?? 1);
+    dimensionData['texture.scaleX'] =  extractNumVar(imgName, 'scaleX', dimensionData['texture.scaleX']);
+    dimensionData['texture.scaleY'] =  extractNumVar(imgName, 'scaleY', dimensionData['texture.scaleY']);
+    // Anchor
+    dimensionData['texture.anchorX'] =  extractNumVar(imgName, 'anchor', prototypeData?.texture.anchorX ?? 0.5);
+    dimensionData['texture.anchorY'] =  extractNumVar(imgName, 'anchor', prototypeData?.texture.anchorY ?? 0.5);
+    dimensionData['texture.anchorX'] =  extractNumVar(imgName, 'anchorX', dimensionData['texture.anchorX']);
+    dimensionData['texture.anchorY'] =  extractNumVar(imgName, 'anchorY', dimensionData['texture.anchorY']);
     return dimensionData;
 }
