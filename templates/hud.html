@@ -9,7 +9,7 @@
                             <img class="thwildcard-button-image" src="{{image.route}}" alt="{{image.name}}" data-name="{{image.route}}" />
                         {{/if}}
                         {{#if image.vid}}
-                            <video class="thwildcard-button-image" src="{{image.route}}" alt="{{image.name}}" data-name="{{image.route}}" autoplay loop />
+                            <video class="thwildcard-button-image" src="{{image.route}}" alt="{{image.name}}" data-name="{{image.route}}" {{#if ../videoAutoplay}}autoplay{{/if}} muted loop></video>
                         {{/if}}
                     {{else}}
                         <span data-name="{{image.route}}">{{image.name}}</span>
