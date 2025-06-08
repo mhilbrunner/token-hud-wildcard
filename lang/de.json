@@ -6,6 +6,8 @@
 	"THWildcard.ButtonTitle": "Datei wählen",
 	"THWildcard.DisplaySettingName": "Als Bild anzeigen?",
 	"THWildcard.DisplaySettingHint": "Deaktivieren, um die Bilder stattdessen als Liste von Dateinamen im Auswahl-HUD anzuzeigen. Standard: ein.",
+	"THWildcard.TooltipsSettingName": "Tooltips anzeigen",
+	"THWildcard.TooltipsSettingHint": "Deaktivieren, um Bildnamen nicht als Tooltips im Auswahl-HUD anzuzeigen. Standard: ein.",
 	"THWildcard.VideoAutoplaySettingName": "Video-Vorschau automatisch abspielen",
 	"THWildcard.VideoAutoplaySettingHint": "Deaktivieren, um Vorschau für Videodateien in der Auswahl-HUD nicht automatisch abzuspielen. Kann bei großer Menge Videodateien die Performance verbessern. Standard: ein.",
 	"THWildcard.OpacitySettingName": "Transparenz der Tokenvorschau",
