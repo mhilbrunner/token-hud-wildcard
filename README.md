@@ -12,9 +12,9 @@ This [Foundry VTT](https://foundryvtt.com/) modules adds a button to the Token H
 When this HUD button is pressed, a small panel will be displayed on the right side of the token HUD with a list of buttons for each detected image from the Wildcard Images functionality.
 Pressing any of these will allow to easily change the image of the Token without opening the token configuration panel.
 
-<p style="text-align: center;">
-<img src="https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/images/hud-options1.png" alt="HUD Options" height="280" style="margin: 0 auto;" />
-<img src="https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/images/hud-options2.png" alt="HUD Options" height="280" style="margin: 0 auto;" />
+<p align="center">
+    <img src="https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/.github/images/hud-options1.png" alt="HUD Options" height="280" />
+    <img src="https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/.github/images/hud-options2.png" alt="HUD Options" height="280" />
 </p>
 
 *The token images were done by the amazing Ross McConnell at [2-Minute Tabletop](https://2minutetabletop.com/) and are part of the Hero Tokens 3 Pack.*
@@ -54,10 +54,11 @@ Some valid file name examples:
 
 To install the module, follow the Foundry article on [Module Management](https://foundryvtt.com/article/modules/).
 
-For installation by manifest URL, this is the URL: `https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/module.json`
+For installation by manifest URL, this is the URL:  
+`https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/module.json`
 
 ZIP file downloads and manifest files for specific module versions are listed under
-[releases]((https://github.com/mhilbrunner/token-hud-wildcard/releases/latest/)).
+[releases](https://github.com/mhilbrunner/token-hud-wildcard/releases/latest/).
 
 ## Changelog
 
