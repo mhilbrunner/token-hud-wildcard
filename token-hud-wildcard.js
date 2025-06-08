@@ -7,6 +7,14 @@ Hooks.on('init', () => {
         type: Boolean,
         default: true
     });
+    game.settings.register('token-hud-wildcard', 'tooltips', {
+        name: game.i18n.format('THWildcard.TooltipsSettingName'),
+        hint: game.i18n.format('THWildcard.TooltipsSettingHint'),
+        scope: 'client',
+        config: true,
+        type: Boolean,
+        default: true
+    });
     game.settings.register('token-hud-wildcard', 'videoAutoplay', {
         name: game.i18n.format('THWildcard.VideoAutoplaySettingName'),
         hint: game.i18n.format('THWildcard.VideoAutoplaySettingHint'),
@@ -107,7 +115,9 @@ Hooks.on('renderTokenHUD', async (app, html, context) => {
 
     const imageDisplay = game.settings.get('token-hud-wildcard', 'imageDisplay');
     const videoAutoplay = game.settings.get('token-hud-wildcard', 'videoAutoplay');
-    const wildcardDisplay = await renderTemplate('/modules/token-hud-wildcard/templates/hud.html', { images, imageDisplay, videoAutoplay });
+    const tooltips = game.settings.get('token-hud-wildcard', 'tooltips');
+    const wildcardDisplay = await renderTemplate('/modules/token-hud-wildcard/templates/hud.html',
+        { images, imageDisplay, videoAutoplay, tooltips });
 
     let right = html.querySelector('div.right');
     right?.insertAdjacentHTML('beforeend', wildcardDisplay);
