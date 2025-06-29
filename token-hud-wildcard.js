@@ -164,7 +164,11 @@ Hooks.on('renderTokenHUD', async (app, html, context) => {
         button.addEventListener('click', function (event) {
             event.preventDefault();
             event.stopPropagation();
-            updateTokenImage(token, imgName);
+
+            const menuActive = button?.parentElement?.classList?.contains('active');
+            if (menuActive) {
+                updateTokenImage(token, imgName);
+            }
         });
 
         button.addEventListener('contextmenu', function (event) {
