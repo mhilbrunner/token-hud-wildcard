@@ -7,7 +7,7 @@
 ![GitHub Downloads Release](https://img.shields.io/github/downloads/mhilbrunner/token-hud-wildcard/latest/total?label=Downloads+(Latest))
 ![GitHub Release Date](https://img.shields.io/github/release-date/mhilbrunner/token-hud-wildcard?label=Release+Date)
 
-This [Foundry VTT](https://foundryvtt.com/) modules adds a button to the Token HUD if the token has *Randomized Wildcard Images* activated and more than 1 image.
+This [Foundry VTT](https://foundryvtt.com/packages/token-hud-wildcard) module adds a button to the Token HUD if the token has *Randomized Wildcard Images* activated and more than 1 image.
 
 When this HUD button is pressed, a small panel will be displayed on the right side of the token HUD with a list of buttons for each detected image from the Wildcard Images functionality.
 Pressing any of these will allow to easily change the image of the Token without opening the token configuration panel.
@@ -19,8 +19,7 @@ Pressing any of these will allow to easily change the image of the Token without
 
 *The token images were done by the amazing Ross McConnell at [2-Minute Tabletop](https://2minutetabletop.com/) and are part of the Hero Tokens 3 Pack.*
 
-**Note:** This is an updated fork of the original module by **javieros105**. See **Contributors** below for everyone who helped out maintaining this module.
-If you need something more fully featured, consider switching to [Token Variant Art](https://foundryvtt.com/packages/token-variants) or other alternatives.
+This is an updated fork of the original module by **javieros105**. See **Contributors** below for everyone who helped out maintaining this module.
 
 ## Usage
 
@@ -54,7 +53,7 @@ Some valid file name examples:
 
 To install the module, follow the Foundry article on [Module Management](https://foundryvtt.com/article/modules/).
 
-For installation by manifest URL, this is the URL:  
+For installation by manifest URL, use this URL:  
 `https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/module.json`
 
 ZIP file downloads and manifest files for specific module versions are listed under
