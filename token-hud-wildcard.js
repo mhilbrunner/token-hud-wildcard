@@ -121,34 +121,13 @@ Hooks.on('renderTokenHUD', async (app, html, context) => {
 
     let right = html.querySelector('div.right');
     right?.insertAdjacentHTML('beforeend', wildcardDisplay);
-    right?.addEventListener('click', async (event) => {
-        let activeButton, clickedButton, tokenButton;
-        for (const button of html.querySelectorAll('div.control-icon')?.values()) {
-            if (button.classList.contains('active')) activeButton = button;
-            if (button === event.target.parentElement) clickedButton = button;
-            if (button.dataset.action === 'thwildcard-selector') tokenButton = button;
-        }
-
-        if (clickedButton === tokenButton && activeButton !== tokenButton) {
-            tokenButton.classList.add('active');
-            html.querySelector('.thwildcard-selector-wrap')?.classList.add('active');
-            const effectSelector = '[data-action="effects"]';
-            html.querySelector(`.control-icon${effectSelector}`)?.classList.remove('active');
-            html.querySelector('.status-effects')?.classList.remove('active');
-        } else {
-            tokenButton.classList.remove('active');
-            html.querySelector('.thwildcard-selector-wrap')?.classList.remove('active');
-        }
+    const btn = right?.querySelector('div.control-icon[data-action="thwildcard-selector"]');
+    const flyout = html.querySelector('.thwildcard-selector-wrap');
+    btn?.addEventListener('click', async (event) => {
+        btn?.classList.toggle('active');
+        flyout?.classList.toggle('active');
     });
-    right.addEventListener('contextmenu', async (event) => {
-        if (event.target?.parentElement?.dataset?.action !== 'thwildcard-selector') {
-            return;
-        }
-        if (!game.settings.get('token-hud-wildcard', 'rightClickRandomize')) {
-            return;
-        }
-        event.preventDefault();
-        event.stopPropagation();
+    btn?.addEventListener('contextmenu', async (event) => {
         const randomImg = await getRandomTokenImage(token);
         if (randomImg?.route) {
             updateTokenImage(token, randomImg.route);
@@ -156,7 +135,6 @@ Hooks.on('renderTokenHUD', async (app, html, context) => {
     });
 
     const buttons = html.querySelectorAll('.thwildcard-button-select');
-
     for (const button of buttons?.values()) {
         const imgName = button.querySelector('span, .thwildcard-button-image')?.dataset?.name;
         if (!imgName) continue;
