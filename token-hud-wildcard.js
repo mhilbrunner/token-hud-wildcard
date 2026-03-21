@@ -251,7 +251,7 @@ function getTokenDimensions(token, imgName) {
     var prototypeData = token?.actor?.prototypeToken;
     var dimensionData = {};
     dimensionData['height'] = extractNumVar(imgName, 'height', prototypeData?.height ?? 1);
-    dimensionData['width'] = extractNumVar(imgName, 'width', prototypeData?.height ?? 1);
+    dimensionData['width'] = extractNumVar(imgName, 'width', prototypeData?.width ?? 1);
     dimensionData['alpha'] = extractNumVar(imgName, 'alpha', prototypeData?.alpha ?? 1);
     // Scale
     dimensionData['texture.scaleX'] = extractNumVar(imgName, 'scale', prototypeData?.texture.scaleX ?? 1);
