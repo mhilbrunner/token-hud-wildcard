@@ -1,6 +1,6 @@
 # Token HUD Wildcard for Foundry VTT
 
-![Compatible Foundry Version](https://img.shields.io/badge/Foundry-v13-informational)
+![Compatible Foundry Version](https://img.shields.io/badge/Foundry-v14-informational)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/mhilbrunner/token-hud-wildcard?label=Latest+Release)
 ![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Ftoken-hud-wildcard&colorB=4aa94a)
 ![GitHub Downloads All Releases](https://img.shields.io/github/downloads/mhilbrunner/token-hud-wildcard/total?label=Downloads+(Total))
@@ -53,8 +53,9 @@ Some valid file name examples:
 
 To install the module, follow the Foundry article on [Module Management](https://foundryvtt.com/article/modules/).
 
-For installation by manifest URL, use this URL:  
-`https://raw.githubusercontent.com/mhilbrunner/token-hud-wildcard/master/module.json`
+For installation by manifest URL, use this URL:
+
+<https://github.com/mhilbrunner/token-hud-wildcard/releases/latest/download/module.json>
 
 ZIP file downloads and manifest files for specific module versions are listed under
 [releases](https://github.com/mhilbrunner/token-hud-wildcard/releases/latest/).
